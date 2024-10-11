@@ -9,7 +9,7 @@
 
 {% macro get_dbt_seeds_empty_table_query() %}
     {% set dbt_seeds_empty_table_query = elementary.empty_table([('unique_id', 'string'),
-                                                                  ('alias', 'string'),
+                                                                  ('model_alias', 'string'),
                                                                   ('checksum', 'string'),
                                                                   ('tags', 'long_string'),
                                                                   ('meta', 'long_string'),
@@ -53,7 +53,7 @@
 
     {% set flatten_seed_metadata_dict = {
         'unique_id': node_dict.get('unique_id'),
-        'alias': node_dict.get('alias'),
+        'model_alias': node_dict.get('alias'),
         'checksum': checksum_dict.get('checksum'),
         'tags': elementary.filter_none_and_sort(tags),
         'meta': meta_dict,

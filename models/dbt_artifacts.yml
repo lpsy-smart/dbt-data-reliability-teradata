@@ -12,7 +12,7 @@ models:
         data_type: string
         description: The unique id of the model.
 
-      - name: alias
+      - name: model_alias
         data_type: string
         description: ""
 
@@ -101,7 +101,7 @@ models:
         data_type: string
         description: ""
 
-      - name: alias
+      - name: model_alias
         data_type: string
         description: ""
 
@@ -275,7 +275,7 @@ models:
         data_type: string
         description: ""
 
-      - name: alias
+      - name: model_alias
         data_type: string
         description: ""
 

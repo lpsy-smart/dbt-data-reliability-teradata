@@ -246,3 +246,8 @@ models:
       Run results of dbt invocations, enriched with jobs metadata.
       Each row is the result of a single job.
       This is a view on `dbt_invocations`.
+
+  - name: dbt_source_freshness_results
+    columns:
+      - name: error
+        quote: true

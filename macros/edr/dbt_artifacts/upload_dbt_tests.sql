@@ -16,7 +16,7 @@
                                                                  ('schema_name', 'string'),
                                                                  ('name', 'string'),
                                                                  ('short_name', 'string'),
-                                                                 ('alias', 'string'),
+                                                                 ('model_alias', 'string'),
                                                                  ('test_column_name', 'string'),
                                                                  ('severity', 'string'),
                                                                  ('warn_if', 'string'),
@@ -143,7 +143,7 @@
     {% set flatten_test_metadata_dict = {
         'unique_id': node_dict.get('unique_id'),
         'short_name': test_short_name,
-        'alias': node_dict.get('alias'),
+        'model_alias': node_dict.get('alias'),
         'test_column_name': node_dict.get('column_name') or test_kwargs.get('column_name'),
         'severity': config_dict.get('severity'),
         'warn_if': config_dict.get('warn_if'),
