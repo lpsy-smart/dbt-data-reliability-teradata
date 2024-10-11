@@ -3,7 +3,7 @@
     
     {% set max_column_size = elementary.get_column_size() %}
     {% if as_column_value and max_column_size and compiled_code and compiled_code | length > max_column_size %}
-        {% do return(elementary.get_compiled_code_too_long_err_msg()) %}
+        {% set compiled_code = compiled_code[:max_column_size] %}
     {% endif %}
     
     {% do return(compiled_code) %}
