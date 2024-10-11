@@ -41,7 +41,7 @@
     ('created_at', 'timestamp'),
     ('max_loaded_at_time_ago_in_s','float'),
     ('status','string'),
-    ('error','string'),
+    ('error_msg','string'),
     ('compile_started_at', 'string'),
     ('compile_completed_at', 'string'),
     ('execute_started_at', 'string'),

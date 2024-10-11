@@ -13,7 +13,7 @@
     {% do return({
       "unique_id": result_dict.node.unique_id,
       "status": result_dict.status,
-      "error": result_dict.message,
+      "error_msg": result_dict.message,
     }) %}
   {% endif %}
   {% do return({
@@ -50,7 +50,7 @@
        'snapshotted_at': node_dict.get('snapshotted_at'),
        'max_loaded_at_time_ago_in_s': node_dict.get('max_loaded_at_time_ago_in_s'),
        'status': node_dict.get('status'),
-       'error': node_dict.get('error'),
+       'error_msg': node_dict.get('error'),
        'warn_after': criteria_dict.get('warn_after'),
        'error_after': criteria_dict.get('error_after'),
        'filter': criteria_dict.get('filter'),

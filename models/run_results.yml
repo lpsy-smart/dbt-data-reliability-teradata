@@ -249,5 +249,5 @@ models:
 
   - name: dbt_source_freshness_results
     columns:
-      - name: error
+      - name: error_msg
         quote: true
