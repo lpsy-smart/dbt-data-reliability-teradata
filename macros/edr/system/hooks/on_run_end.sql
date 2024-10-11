@@ -5,7 +5,7 @@
         {% do return("") %}
       {% endif %}
 
-      {% if not elementary.get_config_var('disable_dbt_artifacts_autoupload') %}
+      {# {% if not elementary.get_config_var('disable_dbt_artifacts_autoupload') %}
         {% do elementary.upload_dbt_artifacts() %}
       {% endif %}
 
@@ -19,7 +19,7 @@
 
       {% if elementary.is_freshness_command() and not elementary.get_config_var('disable_freshness_results') %}
         {% do elementary.upload_source_freshness() %}
-      {% endif %}
+      {% endif %} #}
 
       {% if not elementary.get_config_var('disable_dbt_invocation_autoupload') %}
         {% do elementary.upload_dbt_invocation() %}
