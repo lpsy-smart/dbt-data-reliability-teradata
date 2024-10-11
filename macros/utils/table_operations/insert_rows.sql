@@ -65,6 +65,48 @@
     {{ return(elementary.default__insert_rows(table_relation, rows, false, chunk_size, on_query_exceed)) }}
 {% endmacro %}
 
+{% macro teradata__insert_rows(table_relation, rows, should_commit=false, chunk_size=5000, on_query_exceed=none) %}
+    {% do elementary.begin_duration_measure_context('insert_rows') %}
+
+    {% if not rows %}
+      {% do elementary.end_duration_measure_context('insert_rows') %}
+      {{ return(none) }}
+    {% endif %}
+
+    {% if not table_relation %}
+        {% do elementary.warn_missing_elementary_models() %}
+        {% do elementary.end_duration_measure_context('insert_rows') %}
+        {{ return(none) }}
+    {% endif %}
+
+    {% do elementary.begin_duration_measure_context('get_columns_in_relation') %}
+    {% set columns = adapter.get_columns_in_relation(table_relation) %}
+    {% do elementary.end_duration_measure_context('get_columns_in_relation') %}
+
+    {% set insert_rows_queries_td = elementary.get_insert_rows_queries_td(table_relation, columns, rows) %}
+    {% do elementary.file_log("Running insert query.") %}
+    {% do elementary.file_log(insert_rows_queries_td) %}
+    {% do elementary.begin_duration_measure_context('run_insert_rows_query') %}
+    {% do elementary.run_query(insert_rows_queries_td|join('; ')) %}
+    {% do elementary.end_duration_measure_context('run_insert_rows_query') %}
+    {% do elementary.end_duration_measure_context('insert_rows') %}
+{% endmacro %}
+
+{% macro get_insert_rows_queries_td(table_relation, columns, rows) %}
+    {% set base_insert_query %}
+       insert into {{ table_relation }}
+         ({%- for column in columns -%}
+           {{- column.name -}} {{- "," if not loop.last else "" -}}
+         {%- endfor -%}) values
+    {% endset %}
+    {% set insert_queries = [] %}
+    {% for row in rows %}
+          {% set row_sql = elementary.render_row_to_sql(row, columns) %}
+          {% do insert_queries.append(base_insert_query + row_sql) %}
+    {% endfor %}
+    {{ return(insert_queries) }}
+{% endmacro %}
+  
 {% macro get_insert_rows_queries(table_relation, columns, rows, query_max_size=none, on_query_exceed=none) -%}
     {% do elementary.begin_duration_measure_context('get_insert_rows_queries') %}
 

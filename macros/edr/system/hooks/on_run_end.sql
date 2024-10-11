@@ -15,11 +15,11 @@
 
       {# {% if elementary.is_test_command() and not elementary.get_config_var('disable_tests_results') %}
         {% do elementary.handle_tests_results() %}
-      {% endif %}
+      {% endif %} #}
 
       {% if elementary.is_freshness_command() and not elementary.get_config_var('disable_freshness_results') %}
         {% do elementary.upload_source_freshness() %}
-      {% endif %} #}
+      {% endif %}
 
       {% if not elementary.get_config_var('disable_dbt_invocation_autoupload') %}
         {% do elementary.upload_dbt_invocation() %}
