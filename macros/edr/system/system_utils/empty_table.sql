@@ -77,7 +77,7 @@
 
 
 {% macro empty_schema_columns_snapshot() %}
-    {{ elementary.empty_table([('column_state_id','string'),('full_column_name','string'),('full_table_name','string'),('column_name','string'),('data_type','string'),('is_new','boolean'),('detected_at','timestamp'),('created_at','timestamp')]) }}
+    {{ elementary.empty_table([('column_state_id','string'),('full_column_name','string'),('full_table_name','string'),('column_name','string'),('data_type','string'),('is_new','string'),('detected_at','timestamp'),('created_at','timestamp')]) }}
 {% endmacro %}
 
 
