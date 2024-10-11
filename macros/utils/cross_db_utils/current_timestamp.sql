@@ -3,11 +3,7 @@
 {%- endmacro %}
 
 {% macro default__edr_current_timestamp() -%}
-    {% set macro = dbt_utils.current_timestamp %}
-    {% if not macro %}
-        {{ exceptions.raise_compiler_error("Did not find a `current_timestamp` macro.") }}
-    {% endif %}
-    {{ return(macro()) }}
+    CURRENT_TIMESTAMP
 {%- endmacro %}
 
 {% macro databricks__edr_current_timestamp() -%}
