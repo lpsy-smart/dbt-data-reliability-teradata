@@ -9,7 +9,7 @@
         {% do elementary.upload_dbt_artifacts() %}
       {% endif %} #}
 
-      {% if not elementary.get_config_var('disable_run_results') %}
+      {% if elementary.is_run_command() and not elementary.get_config_var('disable_run_results') %}
         {% do elementary.upload_run_results() %}
       {% endif %}
 
