@@ -43,7 +43,7 @@
     'max_int': 2147483647,
     'custom_run_started_at': none,
     'edr_monitors': elementary.get_default_monitors(),
-    'long_string_size': 65535,
+    'long_string_size': 4096,
     'collect_model_sql': true,
     'query_max_size': 1000000,
     'insert_rows_method': 'max_query_size',
