@@ -10,7 +10,7 @@
 {% macro get_dbt_models_empty_table_query() %}
     {% set columns = [
         ('unique_id', 'string'),
-        ('alias', 'string'),
+        ('model_alias', 'string'),
         ('checksum', 'string'),
         ('materialization', 'string'),
         ('tags', 'long_string'),
