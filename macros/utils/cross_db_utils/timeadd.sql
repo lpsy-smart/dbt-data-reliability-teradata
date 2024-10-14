@@ -35,5 +35,6 @@
 {% endmacro %}
 
 {% macro teradata__edr_timeadd(date_part, number, timestamp_expression) %}
-    {{ elementary.edr_cast_as_timestamp(timestamp_expression) }} + INTERVAL '{{ elementary.edr_cast_as_int(number) }}' {{ date_part }}
+    {{ elementary.edr_cast_as_timestamp(timestamp_expression) }}
+    {% if number < 0 %}-{% else %}+{% endif%}INTERVAL '{{ number|abs }}' {{ date_part }}
 {% endmacro %}
