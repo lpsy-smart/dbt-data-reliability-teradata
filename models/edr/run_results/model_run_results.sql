@@ -39,7 +39,7 @@ SELECT
     models.path,
     models.original_path,
     models.owner,
-    models.alias,
+    models.model_alias,
     ROW_NUMBER() OVER (PARTITION BY run_results.unique_id ORDER BY run_results.generated_at DESC) AS model_invocation_reverse_index,
     CASE WHEN FIRST_VALUE(invocation_id) OVER (PARTITION BY {{ elementary.edr_time_trunc('day', 'run_results.generated_at') }} ORDER BY run_results.generated_at ASC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING ) = invocation_id
               THEN TRUE

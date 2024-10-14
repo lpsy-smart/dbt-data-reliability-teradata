@@ -20,7 +20,7 @@ select
   {{ elementary.edr_cast_as_timestamp("results.generated_at") }} as detected_at,
   results.max_loaded_at_time_ago_in_s,
   results.status,
-  results.error,
+  results.error_msg,
   results.warn_after,
   results.error_after,
   results.filter,
@@ -43,4 +43,10 @@ select
   results.filter as freshness_filter
 from results
 join sources on results.unique_id = sources.unique_id
-where {{ not elementary.get_config_var('disable_source_freshness_alerts') }} and lower(status) != 'pass'
+where 
+{% if not elementary.get_config_var('disable_source_freshness_alerts') %} 
+  1=1
+{% else %}
+  1=0
+{% endif %}
+and lower(status) <> 'pass'

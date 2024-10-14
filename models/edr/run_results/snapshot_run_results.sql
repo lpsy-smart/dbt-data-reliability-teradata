@@ -39,6 +39,6 @@ SELECT
     snapshots.path,
     snapshots.original_path,
     snapshots.owner,
-    snapshots.alias
+    snapshots.model_alias
 FROM dbt_run_results run_results
 JOIN dbt_snapshots snapshots ON run_results.unique_id = snapshots.unique_id

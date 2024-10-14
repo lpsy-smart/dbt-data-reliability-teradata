@@ -39,6 +39,6 @@ SELECT
     seeds.path,
     seeds.original_path,
     seeds.owner,
-    seeds.alias
+    seeds.model_alias
 FROM dbt_run_results run_results
 JOIN dbt_seeds seeds ON run_results.unique_id = seeds.unique_id
