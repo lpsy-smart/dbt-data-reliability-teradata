@@ -23,4 +23,4 @@ select
 from {{ ref(artifact_model) }}
 {% if not loop.last %} union all {% endif %}
 {% endfor %}
-order by metadata_hash
+{# order by metadata_hash #}
