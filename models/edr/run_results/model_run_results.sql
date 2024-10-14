@@ -42,12 +42,12 @@ SELECT
     models.model_alias,
     ROW_NUMBER() OVER (PARTITION BY run_results.unique_id ORDER BY run_results.generated_at DESC) AS model_invocation_reverse_index,
     CASE WHEN FIRST_VALUE(invocation_id) OVER (PARTITION BY {{ elementary.edr_time_trunc('DD', 'run_results.generated_at') }} ORDER BY run_results.generated_at ASC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING ) = invocation_id
-              THEN TRUE
-              ELSE FALSE 
+              THEN "TRUE"
+              ELSE "FALSE" 
          END                                                               AS is_the_first_invocation_of_the_day,
     CASE WHEN LAST_VALUE(invocation_id) OVER (PARTITION BY {{ elementary.edr_time_trunc('DD', 'run_results.generated_at') }} ORDER BY run_results.generated_at ASC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING ) = invocation_id
-              THEN TRUE
-              ELSE FALSE 
+              THEN "TRUE"
+              ELSE "FALSE" 
          END                                                               AS is_the_last_invocation_of_the_day
     
 FROM dbt_run_results run_results

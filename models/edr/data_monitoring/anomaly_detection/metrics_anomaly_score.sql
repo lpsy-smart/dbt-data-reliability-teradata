@@ -27,7 +27,7 @@ time_window_aggregation as (
         bucket_duration_hours,
         updated_at,
         avg(metric_value) over (partition by metric_name, full_table_name, column_name order by bucket_start asc rows between unbounded preceding and current row) as training_avg,
-        stddev(metric_value) over (partition by metric_name, full_table_name, column_name order by bucket_start asc rows between unbounded preceding and current row) as training_stddev,
+        stddev_samp(metric_value) over (partition by metric_name, full_table_name, column_name order by bucket_start asc rows between unbounded preceding and current row) as training_stddev,
         count(metric_value) over (partition by metric_name, full_table_name, column_name order by bucket_start asc rows between unbounded preceding and current row) as training_set_size,
         last_value(bucket_end) over (partition by metric_name, full_table_name, column_name order by bucket_start asc rows between unbounded preceding and current row) training_end,
         first_value(bucket_end) over (partition by metric_name, full_table_name, column_name order by bucket_start asc rows between unbounded preceding and current row) as training_start
@@ -62,7 +62,7 @@ metrics_anomaly_score as (
         where
             metric_value is not null
             and training_avg is not null
-            and bucket_end >= {{ elementary.edr_timeadd('day', '-7', elementary.edr_date_trunc('day', elementary.edr_current_timestamp())) }}
+            and bucket_end >= {{ elementary.edr_timeadd('day', '-7', elementary.edr_date_trunc('DD', elementary.edr_current_timestamp())) }}
     {{ dbt_utils.group_by(15) }}
     order by bucket_end desc
 
