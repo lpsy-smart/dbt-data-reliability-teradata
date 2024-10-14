@@ -64,7 +64,6 @@ metrics_anomaly_score as (
             and training_avg is not null
             and bucket_end >= {{ elementary.edr_timeadd('day', '-7', elementary.edr_date_trunc('DD', elementary.edr_current_timestamp())) }}
     {{ dbt_utils.group_by(15) }}
-    order by bucket_end desc
 
 
 ),
@@ -89,8 +88,8 @@ final as (
         training_set_size,
         updated_at,
         case
-            when abs(anomaly_score) > {{ elementary.get_config_var('anomaly_sensitivity') }} then true
-            else false end
+            when abs(anomaly_score) > {{ elementary.get_config_var('anomaly_sensitivity') }} then 'true'
+            else 'false' end
         as is_anomaly
     from metrics_anomaly_score
 )

@@ -29,7 +29,7 @@ with error_models as (
             path,
             original_path,
             owner,
-            alias 
+            model_alias 
     from {{ ref('model_run_results') }}
   
     union all
@@ -56,7 +56,7 @@ with error_models as (
             path,
             original_path,
             owner,
-            alias  
+            model_alias  
   from {{ ref('snapshot_run_results') }}
 )
 
@@ -72,7 +72,7 @@ select model_execution_id as alert_id,
        message,
        owner as owners,
        tags,
-       alias,
+       model_alias,
        status,
        full_refresh
 from error_models
