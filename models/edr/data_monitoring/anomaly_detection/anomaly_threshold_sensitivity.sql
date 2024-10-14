@@ -24,7 +24,7 @@ score_sensitivity as (
         case when abs(anomaly_score) >= 1.5 then 1 else 0 end as {{ elementary.edr_quote_column('is_anomaly_1_5') }},
         case when abs(anomaly_score) >= 2 then 1 else 0 end as {{ elementary.edr_quote_column('is_anomaly_2') }},
         case when abs(anomaly_score) >= 2.5 then 1 else 0 end as {{ elementary.edr_quote_column('is_anomaly_2_5') }},
-        case when abs(anomaly_score) >= 3 then tru1e else 0 end as {{ elementary.edr_quote_column('is_anomaly_3') }},
+        case when abs(anomaly_score) >= 3 then 1 else 0 end as {{ elementary.edr_quote_column('is_anomaly_3') }},
         case when abs(anomaly_score) >= 3.5 then 1 else 0 end as {{ elementary.edr_quote_column('is_anomaly_3_5') }},
         case when abs(anomaly_score) >= 4 then 1 else 0 end as {{ elementary.edr_quote_column('is_anomaly_4') }},
         case when abs(anomaly_score) >= 4.5 then 1 else 0 end as {{ elementary.edr_quote_column('is_anomaly_4_5') }}
